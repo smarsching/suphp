@@ -43,7 +43,7 @@ am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
-mkinstalldirs = $(install_sh) -d
+mkinstalldirs = $(SHELL) $(top_srcdir)/config/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/src/config.h
 CONFIG_CLEAN_FILES =
 LTLIBRARIES = $(noinst_LTLIBRARIES)
@@ -72,6 +72,7 @@ AMDEP_TRUE = @AMDEP_TRUE@
 AMTAR = @AMTAR@
 APACHE_VERSION_1_3 = @APACHE_VERSION_1_3@
 APACHE_VERSION_2 = @APACHE_VERSION_2@
+APR_CPPFLAGS = @APR_CPPFLAGS@
 APR_INCLUDEDIR = @APR_INCLUDEDIR@
 APXS = @APXS@
 APXS_EXTRA_CFLAGS = @APXS_EXTRA_CFLAGS@
@@ -179,6 +180,7 @@ target_alias = @target_alias@
 @COND_APUSERGROUP_TRUE@DEFINE_USERGROUP = -DSUPHP_USE_USERGROUP
 AM_CFLAGS = -I@APXS_INCLUDEDIR@ -I@APR_INCLUDEDIR@ @APXS_EXTRA_CFLAGS@ \
 	-DSUPHP_PATH_TO_SUPHP=\"${sbindir}/suphp\" $(DEFINE_USERGROUP)
+AM_CPPFLAGS = @APR_CPPFLAGS@
 noinst_LTLIBRARIES = mod_suphp.la
 mod_suphp_la_SOURCES = mod_suphp.c
 mod_suphp_la_LDFLAGS = -module -rpath '@APXS_LIBEXECDIR@'

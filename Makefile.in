@@ -39,7 +39,7 @@ DIST_COMMON = README $(am__configure_deps) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in $(top_srcdir)/configure AUTHORS COPYING \
 	ChangeLog INSTALL NEWS config/config.guess config/config.sub \
 	config/depcomp config/install-sh config/ltmain.sh \
-	config/missing
+	config/missing config/mkinstalldirs
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/acinclude.m4 \
@@ -48,7 +48,7 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
  configure.lineno configure.status.lineno
-mkinstalldirs = $(install_sh) -d
+mkinstalldirs = $(SHELL) $(top_srcdir)/config/mkinstalldirs
 CONFIG_HEADER = $(top_builddir)/src/config.h
 CONFIG_CLEAN_FILES =
 SOURCES =
@@ -79,6 +79,7 @@ AMDEP_TRUE = @AMDEP_TRUE@
 AMTAR = @AMTAR@
 APACHE_VERSION_1_3 = @APACHE_VERSION_1_3@
 APACHE_VERSION_2 = @APACHE_VERSION_2@
+APR_CPPFLAGS = @APR_CPPFLAGS@
 APR_INCLUDEDIR = @APR_INCLUDEDIR@
 APXS = @APXS@
 APXS_EXTRA_CFLAGS = @APXS_EXTRA_CFLAGS@
