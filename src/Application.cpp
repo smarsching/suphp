@@ -261,24 +261,6 @@ void suPHP::Application::checkScriptFile(
 	logger.logWarning(error);
 	throw SoftException(error, __FILE__, __LINE__);
     }
-    file_in_docroot = false;
-    for (std::vector<std::string>::const_iterator i = docroots.begin(); i != docroots.end(); i++) {
-        std::string docroot = *i;
-        if (pathMatcher.matches(docroot, scriptFile.getPath())) {
-            file_in_docroot = true;
-            break;
-        }
-    }
-    if (!file_in_docroot) {
-        std::string error = "Script \"" + scriptFile.getPath() 
-            + "\" not within configured docroot";
-        logger.logWarning(error);
-        throw SoftException(error, __FILE__, __LINE__);
-    }
-    
-    // Check directory ownership and permissions
-    checkParentDirectories(realScriptFile, targetUser, config);
-    checkParentDirectories(scriptFile, targetUser, config);
 }
 
 
@@ -377,7 +359,11 @@ void suPHP::Application::changeProcessPermissions(
 	throw SoftException(error, __FILE__, __LINE__);
     }
 #endif // OPT_USERGROUP_PARANOID    
-
+    
+    // Check directory ownership and permissions
+    checkParentDirectories(realScriptFile, targetUser, config);
+    checkParentDirectories(scriptFile, targetUser, config);
+    
     // Common code used for all modes
 
     // Set new group first, because we still need super-user privileges
