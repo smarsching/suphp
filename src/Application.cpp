@@ -177,6 +177,7 @@ void suPHP::Application::checkScriptFile(
     throw (SystemException, SoftException) {
     Logger& logger = API_Helper::getSystemAPI().getSystemLogger();
     File scriptFile = File(scriptFilename);
+    File realScriptFile = File(scriptFile.getRealPath());
 
     // Check wheter file exists
     if (!scriptFile.exists()) {
@@ -184,11 +185,13 @@ void suPHP::Application::checkScriptFile(
 	logger.logWarning(error);
 	throw SoftException(error, __FILE__, __LINE__);
     }
-    
-    // Get full path to script file
-
-    File realScriptFile = File(scriptFile.getRealPath());
-    File directory = realScriptFile.getParentDirectory();
+    if (!realScriptFile.exists()) {
+        std::string error = "File " + realScriptFile.getPath() 
+            + " referenced by symlink " +scriptFile.getPath() 
+            + " does not exist";
+        logger.logWarning(error);
+        throw SoftException(error, __FILE__, __LINE__);
+    }
     
     // Check wheter script is in docroot
     if (realScriptFile.getPath().find(config.getDocroot()) != 0) {
@@ -213,8 +216,19 @@ void suPHP::Application::checkScriptFile(
 	logger.logWarning(error);
 	throw SoftException(error, __FILE__, __LINE__);
     }
+    if (config.getCheckVHostDocroot()
+        && scriptFile.getPath().find(environment.getVar("DOCUMENT_ROOT")) 
+        != 0) {
+        
+        std::string error = "File \"" + scriptFile.getPath()
+            + "\" is not in document root of Vhost \""
+            + environment.getVar("DOCUMENT_ROOT") + "\"";
+        logger.logWarning(error);
+        throw SoftException(error, __FILE__, __LINE__);
+    }
 
-    // Check script and directory permissions
+    // Check script permissions
+    // Directories will be checked later
     if (!realScriptFile.hasUserReadBit()) {
 	std::string error = "File \"" + realScriptFile.getPath()
 	    + "\" not readable";
@@ -231,14 +245,6 @@ void suPHP::Application::checkScriptFile(
 	throw SoftException(error, __FILE__, __LINE__);
     }
     
-    if (!config.getAllowDirectoryGroupWriteable() 
-	&& directory.hasGroupWriteBit()) {
-	std::string error = "Directory \"" + directory.getPath()
-	    + "\" is writeable by group";
-	logger.logWarning(error);
-	throw SoftException(error, __FILE__, __LINE__);
-    }
-
     if (!config.getAllowFileOthersWriteable()
 	&& realScriptFile.hasOthersWriteBit()) {
 	std::string error = "File \"" + realScriptFile.getPath()
@@ -247,14 +253,6 @@ void suPHP::Application::checkScriptFile(
 	throw SoftException(error, __FILE__, __LINE__);
     }
     
-    if (!config.getAllowDirectoryOthersWriteable()
-	&& directory.hasOthersWriteBit()) {
-	std::string error = "Directory \"" + directory.getPath()
-	    + "\" is writeable by others";
-	logger.logWarning(error);
-	throw SoftException(error, __FILE__, __LINE__);
-    }
-
     // Check UID/GID of symlink is matching target
     if (scriptFile.getUser() != realScriptFile.getUser()
 	|| scriptFile.getGroup() != realScriptFile.getGroup()) {
@@ -263,6 +261,24 @@ void suPHP::Application::checkScriptFile(
 	logger.logWarning(error);
 	throw SoftException(error, __FILE__, __LINE__);
     }
+    file_in_docroot = false;
+    for (std::vector<std::string>::const_iterator i = docroots.begin(); i != docroots.end(); i++) {
+        std::string docroot = *i;
+        if (pathMatcher.matches(docroot, scriptFile.getPath())) {
+            file_in_docroot = true;
+            break;
+        }
+    }
+    if (!file_in_docroot) {
+        std::string error = "Script \"" + scriptFile.getPath() 
+            + "\" not within configured docroot";
+        logger.logWarning(error);
+        throw SoftException(error, __FILE__, __LINE__);
+    }
+    
+    // Check directory ownership and permissions
+    checkParentDirectories(realScriptFile, targetUser, config);
+    checkParentDirectories(scriptFile, targetUser, config);
 }
 
 
@@ -274,7 +290,8 @@ void suPHP::Application::changeProcessPermissions(
     UserInfo targetUser;
     GroupInfo targetGroup;
 
-    File scriptFile = File(File(scriptFilename).getRealPath());
+    File scriptFile = File(scriptFilename);
+    File realScriptFile = File(scriptFile.getRealPath());
     API& api = API_Helper::getSystemAPI();
     Logger& logger = api.getSystemLogger();
 
@@ -477,6 +494,41 @@ void suPHP::Application::executeScript(const std::string& scriptFilename,
 	throw SoftException("Could not execute script \"" + scriptFilename
 				+ "\"", e, __FILE__, __LINE__);
     }
+}
+
+
+void suPHP::Application::checkParentDirectories(const File& file,
+                                               const UserInfo& owner,
+                                               const Configuration& config) const throw (SoftException) {
+    File directory = file;
+    Logger& logger = API_Helper::getSystemAPI().getSystemLogger();
+    do {
+        directory = directory.getParentDirectory();
+        
+        UserInfo directoryOwner = directory.getUser();
+        if (directoryOwner != owner && !directoryOwner.isSuperUser()) {
+            std::string error = "Directory " + directory.getPath()
+                + " is not owned by " + owner.getUsername();
+            logger.logWarning(error);
+            throw SoftException(error, __FILE__, __LINE__);
+        }
+        
+        if (!config.getAllowDirectoryGroupWriteable() 
+            && directory.hasGroupWriteBit()) {
+            std::string error = "Directory \"" + directory.getPath()
+                + "\" is writeable by group";
+            logger.logWarning(error);
+            throw SoftException(error, __FILE__, __LINE__);
+        }
+        
+        if (!config.getAllowDirectoryOthersWriteable()
+            && directory.hasOthersWriteBit()) {
+            std::string error = "Directory \"" + directory.getPath()
+                + "\" is writeable by others";
+            logger.logWarning(error);
+            throw SoftException(error, __FILE__, __LINE__);
+        }
+    } while (directory.getPath() != "/");
 }
 
 
