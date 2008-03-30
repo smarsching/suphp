@@ -499,7 +499,8 @@ void suPHP::Application::checkParentDirectories(const File& file,
             throw SoftException(error, __FILE__, __LINE__);
         }
         
-        if (!config.getAllowDirectoryGroupWriteable() 
+        if (!directory.isSymlink()
+            && !config.getAllowDirectoryGroupWriteable() 
             && directory.hasGroupWriteBit()) {
             std::string error = "Directory \"" + directory.getPath()
                 + "\" is writeable by group";
@@ -507,7 +508,8 @@ void suPHP::Application::checkParentDirectories(const File& file,
             throw SoftException(error, __FILE__, __LINE__);
         }
         
-        if (!config.getAllowDirectoryOthersWriteable()
+        if (!directory.isSymlink()
+            && !config.getAllowDirectoryOthersWriteable()
             && directory.hasOthersWriteBit()) {
             std::string error = "Directory \"" + directory.getPath()
                 + "\" is writeable by others";

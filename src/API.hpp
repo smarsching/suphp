@@ -157,6 +157,12 @@ namespace suPHP {
 	virtual GroupInfo File_getGroup(const File& file) const
 	    throw (SystemException) =0;
 	
+        /**
+         * Checks whether a file is a symlink
+         */
+        virtual bool File_isSymlink(const File& file) const 
+            throw (SystemException) =0;
+        
 	/**
 	 * Runs another program (replaces current process)
 	 */
