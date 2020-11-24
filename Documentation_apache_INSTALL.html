@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>suPHP - Documentation - apache/INSTALL</title><style type="text/css">
+     h1
+     {
+      font-family: Helvetica, Arial;
+      font-size: 48px;
+     }
+     
+     body,p,table,td
+     {
+      /* font-family: Times, Times New Roman; */
+      font-family: Helvetica, Arial, sans-serif;
+      font-size:14px;
+      color:#000000;
+     }     
+     
+     table,td
+     {
+      border-color:#000000;
+     }
+     
+     h1
+     {
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:28px;
+      font-weight:bold;
+      color:#000000;
+     }
+     
+     h2
+     {
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:20px;
+      color:#000000;
+      font-weight:normal;
+     }
+     
+     a
+     {
+      color:#4444aa
+     }
+     
+     .navlink
+     {
+      font-family: Helvetica, Arial;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      color:#000000;
+     }
+     
+     table.download,table.download td, table.download th
+     {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 13px;
+     }
+     
+     th.download
+     {
+      background:#000000;
+      color:#ffffff;
+     }
+     
+     a.download
+     {
+      color:#000000;
+     }
+    </style></head><body style="background-color:#ffffff"><table style="border:0px;width:100%"><tr><td style="text-align:center;vertical-align:middle;padding:8px"><h1><img style="vertical-align:middle" src="images/suphp_logo.png" alt="suPHP" />
+        Homepage
+       </h1></td></tr><tr><td style="border-width:1px 0px;border-style:solid;text-align:center;padding:4px"><a href="Home.html" class="navlink">Home</a>
+       |
+       <a href="Download.html" class="navlink">Download</a>
+       |
+       <a href="FAQ.html" class="navlink">FAQ</a>
+       |
+       <a href="Documentation.html" class="navlink">Documentation</a>
+       |
+       <a href="Help.html" class="navlink">Help</a></td></tr><tr><td style="text-align:center;vertical-align:top;height:100%"><table style="text-align:center;border:0px;padding:0px;margin:0px;width:80%;margin-left:auto;margin-right:auto"><tr><td style="text-align:center;vertical-align:top"><div style="border-style: solid; border-width: 3px; border-color: #aa0000; font-size: 1.2em; padding: 0.3em;">
+            suPHP is not maintained any longer and will not receive any further
+            updates <strong>not even security patches</strong>.
+            <br />
+            If you want to continue using suPHP, feel free to create a fork (the
+            complete code is licensed under the GPL version 2).
+            <br />
+            If you are looking for an alternative, have a look at
+            <a href="https://wiki.apache.org/httpd/PHP-FPM">php-fpm</a>.
+            <br />
+            There also is a
+            <a href="https://github.com/lightsey/mod_suphp">fork</a> of suPHP
+            maintained by John Lightsey on GitHub.
+          </div><br />
+  <table style="width:90%;margin-left:auto;margin-right:auto"><tr><td style="text-align:left">
+   <pre>===========================
+== suPHP Apache module   ==
+===========================
+
+Installation
+------------
+
+1. Introduction
+
+The suPHP Apache module together with suPHP itself provides an easy way to
+run PHP scripts with different users on the same server.
+
+It provides security, because the PHP scripts are not run with the rights of
+the webserver's user.
+In addition to that you probably won't have to use PHP's "safe mode", which
+applies many restrictions on the scripts.
+
+Please be sure to have read the README file in this directory and both the
+README and the INSTALL file in the main directory of the suPHP distribution.
+
+
+2. The simple facts
+
+In this part, I'll give the most important information for people who know
+how to compile the Apache Server with additional modules.
+If you aren't familiar with doing this, you'll find a step-by-step guide in
+the third part of this manual.
+
+mod_suphp only consists of one file, called "mod_suphp.c".
+If the suphp binary is not in the default path (/usr/sbin/suphp) you'll have
+to modify the corresponding line in mod_suphp.c before adding it to your
+Apache sources with the "configure" script of Apache.
+ 
+The easiest way to install mod_suphp is to compile it as a dynamically
+loadable module (DSO). If your Apache was compiled with DSO support and
+"apxs" is either in your path or you specified the path to it when running
+"configure", mod_suphp will automatically be compiled when doing "make" and
+installed to your Apache server (when doing "make install").
+
+Information on how to configure mod_suphp can be found in the "CONFIG" file
+in this directory.
+
+Please note that mod_suphp was developped for Apache 1.3.2x and Apache
+2.0.x. It might not work with other version.
+
+suPHP was developped for Linux, perhaps it'll also work with some other
+*NIX-systems. I have heard that there is a suPHP port for FreeBSD, however
+as I do not have running FreeBSD on any system at the moment I cannot test
+which modifications have to be made to the current version to run it on
+suPHP. If you know, tell me and a will try to modify the GNU autoconf
+scripts to make decisions automatically.
+
+If you have tested it with another system and it works, please tell me.
+
+
+3. Step-by-step guide
+
+If you have already running Apache with mod_so (DSO-support), mod_suphp
+should have been installed to your Apache server automatically.
+
+It it is not working look for the two lines
+ LoadModule suphp_module       /usr/lib/httpd/mod_suphp.so
+and
+ AddModule mod_suphp.c
+in your "httpd.conf".
+
+Sometimes "apxs" adds this lines at the wrong locations. In this case you
+will have to move them to the appropriate position (see the Apache
+documentation for details).
+
+To compile Apache from scratch with mod_suphp (statically) proceed with the 
+following steps:
+
+If necessary change the path to the suPHP executable in "mod_suphp.c".
+
+Get the Apache sources from http://www.apache.org and unpack them.
+Now go into the newly created directory. And run "./configure --help" which
+will output some really useful information about the configure-script.
+
+Now run the configure script with the parameters that match your needs but
+add the option "--add-module=/path/to/mod_suphp.c".
+
+This will copy mod_suphp.c to the Apache sources and activate it.
+
+Now you can "make" Apache and install it using "make install".
+
+Please note that suPHP will probably not work if you also compile in mod_php.
+
+To use suPHP to parse PHP-Files add a line like
+
+AddType application/x-httpd-php .php
+
+to your Apache configuration and to activate mod_suphp for the appropriate
+VHosts.
+
+You can turn mod_suphp on by adding the line
+
+suPHP_Engine on
+
+to your global Apache-configuration.
+This will activate mod_suphp for all VirtualHosts.
+
+Please note that you have to specify at least one suPHP_AddHandler
+directive, because mod_suphp by default handles no mime-type.
+
+Example:
+
+suPHP_AddHandler application/x-httpd-php
+
+If you are using "paranoid" or "force" mode, you have to specify
+at least one suPHP_UserGroup directive.
+
+Information about additional options can be found in the "CONFIG"-Readme.
+
+4. Additional information
+
+Please note, that running mod_suphp and mod_php concurrently can be 
+*VERY DANGEROUS* and should be avoided. The same applies to CGI 
+scripts which are run with webserver privileges.
+
+suPHP should only be used if you are using no CGI scripts or if all CGI
+scripts are run using suExec.
+
+
+===================================
+(c)2002-2007 by Sebastian Marsching
+&lt;sebastian@marsching.com&gt;
+Please see LICENSE for
+additional information
+</pre>
+  </td></tr></table>
+ </td></tr></table></td></tr><tr><td style="border:0px;border-top:1px;border-style:solid;text-align:center;padding:4px">
+       (c) 2006-2008 Sebastian Marsching<br /><br /><a href="http://validator.w3.org/check/referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" style="border:0px;width:88px;height:31px" /></a><a href="http://jigsaw.w3.org/css-validator/"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></td></tr></table></body></html>

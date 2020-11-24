@@ -1,0 +1,318 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>suPHP - Home</title><style type="text/css">
+     h1
+     {
+      font-family: Helvetica, Arial;
+      font-size: 48px;
+     }
+     
+     body,p,table,td
+     {
+      /* font-family: Times, Times New Roman; */
+      font-family: Helvetica, Arial, sans-serif;
+      font-size:14px;
+      color:#000000;
+     }     
+     
+     table,td
+     {
+      border-color:#000000;
+     }
+     
+     h1
+     {
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:28px;
+      font-weight:bold;
+      color:#000000;
+     }
+     
+     h2
+     {
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:20px;
+      color:#000000;
+      font-weight:normal;
+     }
+     
+     a
+     {
+      color:#4444aa
+     }
+     
+     .navlink
+     {
+      font-family: Helvetica, Arial;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      color:#000000;
+     }
+     
+     table.download,table.download td, table.download th
+     {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 13px;
+     }
+     
+     th.download
+     {
+      background:#000000;
+      color:#ffffff;
+     }
+     
+     a.download
+     {
+      color:#000000;
+     }
+    </style></head><body style="background-color:#ffffff"><table style="border:0px;width:100%"><tr><td style="text-align:center;vertical-align:middle;padding:8px"><h1><img style="vertical-align:middle" src="images/suphp_logo.png" alt="suPHP" />
+        Homepage
+       </h1></td></tr><tr><td style="border-width:1px 0px;border-style:solid;text-align:center;padding:4px"><a href="Home.html" class="navlink">Home</a>
+       |
+       <a href="Download.html" class="navlink">Download</a>
+       |
+       <a href="FAQ.html" class="navlink">FAQ</a>
+       |
+       <a href="Documentation.html" class="navlink">Documentation</a>
+       |
+       <a href="Help.html" class="navlink">Help</a></td></tr><tr><td style="text-align:center;vertical-align:top;height:100%"><table style="text-align:center;border:0px;padding:0px;margin:0px;width:80%;margin-left:auto;margin-right:auto"><tr><td style="text-align:center;vertical-align:top"><div style="border-style: solid; border-width: 3px; border-color: #aa0000; font-size: 1.2em; padding: 0.3em;">
+            suPHP is not maintained any longer and will not receive any further
+            updates <strong>not even security patches</strong>.
+            <br />
+            If you want to continue using suPHP, feel free to create a fork (the
+            complete code is licensed under the GPL version 2).
+            <br />
+            If you are looking for an alternative, have a look at
+            <a href="https://wiki.apache.org/httpd/PHP-FPM">php-fpm</a>.
+            <br />
+            There also is a
+            <a href="https://github.com/lightsey/mod_suphp">fork</a> of suPHP
+            maintained by John Lightsey on GitHub.
+          </div><br />
+  <table style="border:3px;border-style:solid;border-color:#4444aa;margin-left:auto;margin-right:auto"><tr><td style="text-align:center">
+     You can download version 0.7.2 of suPHP.<br /><a href="https://github.com/smarsching/suphp/releases/download/last/suphp-0.7.2.tar.gz">
+      suphp-0.7.2.tar.gz
+     </a><br />
+     For older versions go to the <a href="Download.html">archive</a>.<br /></td></tr></table><br />
+  <table style="border:1px;border-style:solid;background-color:#cccccc;margin-left:auto;margin-right:auto"><tr><td>
+   suPHP is a tool for executing PHP scripts with the permissions
+   of their owners. It consists of an Apache module (mod_suphp) and a
+   setuid root binary (suphp) that is called by the Apache module to
+   change the uid of the process executing the PHP interpreter.
+  </td></tr></table>
+
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">suPHP 0.7.2 released</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic">2013-05-20</th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   suPHP 0.7.2 has been released.<br />
+   This release fixes a security issue that was introduced with the 0.7.0
+   release. This issue affected the source-highlighting feature and could
+   only be exploited, if the suPHP_PHPPath option was set. In this case
+   local users which could create or edit .htaccess files could possibly
+   execute arbitrary code with the privileges of the user the webserver was
+   running as.
+  </td></tr></table>
+
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">suPHP 0.7.1 released</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic">2009-03-14</th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   suPHP 0.7.1 has been released.<br />
+   This release fixes a bug causing problems with symbol links in the
+   script path, which was introduced with the 0.7.0 release.
+  </td></tr></table>
+
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">suPHP 0.7.0 released</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic">2008-12-25</th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   suPHP 0.7.0 has been released.<br />
+   With this release, several features that have been on the wish 
+   list for a long time, have been realized:
+   <ul>
+    <li>The module for Apache 1.3 only supported AddHandler for older
+     releases. This has been fixed: Now you can use AddType, too.</li>
+    <li>PHP source highlighting: Files of MIME type 
+     application/x-httpd-php-source will now be shown with source
+     highlighting. Remember to set the suPHP_PHPPath directive to
+     enable this feature.</li>
+    <li>suPHP_AddHandler and suPHP_RemoveHandler directives can now
+     be used on per vhost level, too.</li>
+    <li>You can configure more than one docroot and use different
+     variables (like user name or home directory) within docroot
+     and chroot settings.</li>
+   </ul>
+   <span style="font-weight:bold">Attention:</span> The configuration syntax for suphp.conf has
+   slightly changed with this release. Be sure to read the documentation
+   before upgrading, because existing configuration files will not work
+   without changing them.
+  </td></tr></table>
+
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">suPHP 0.6.3 released</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic">2008-03-30</th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   suPHP 0.6.3 has been released.<br />
+   This is a security fix release, fixing tow race-conditions
+   concerning symlinks:
+   <ul>
+    <li>An attacker could create a symlink linking to a file of his
+     own, then change the symlink to point to a file of another user
+     and finally change the link back to a file of his own. This
+     attack requires very accurate timing, because the link has to
+     be changed twice at the right moments. However, if the attacker
+     succeeds he can execute his own code with the permissions of
+     a different user. This will be less harmful when suPHP is run 
+     in paranoid mode, as the attacker has to place his link in a
+     directory that is associated with another user.</li>
+    <li>There is a second vulnerability concerning symlinks that
+      point to a directory. This vulnerability is even more harmful
+      as the link has to be changed once only, which makes the
+      timing much easier. As the other vulnerability this 
+      issue is most harmful if suPHp is running in owner mode.</li>
+   </ul>
+   All users are strongly advised to <span style="font-weight:bold">update immediately</span>.
+  </td></tr></table>
+
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">suPHP 0.6.2 released</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic">2006-11-19</th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   suPHP 0.6.2 has been released.<br />
+   The following problems have been fixed with this release:
+   <ul>
+    <li>Double free() problem with certain versions of GCC</li>
+    <li>Dead locked Apache processes when a script wrote more
+        than 4096 bytes to stderr.</li>
+    <li>Problems with PATH_INFO environment variable</li>
+   </ul>
+   Features / improvements:
+   <ul>
+     <li>Apache 2.2 compatibility</li>
+     <li>(Basic) mod_userdir support</li>
+   </ul>
+  </td></tr></table>
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">suPHP 0.6.1 released</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic">2005-12-01</th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   suPHP 0.6.1 has been released.<br />
+   This is mainly a bugfix release (hopefully) fixing the following
+   problems:
+   <ul>
+    <li>Buildproblems due to APR headers not being found</li>
+    <li>HTTP 500 Errors when a script sends a Last-Modified-Header</li>
+    <li>suPHP is now reading its runtime configuration from a file</li>
+    <li>Potential buffer overflow in mod_suphp.c for Apache2.
+        This overflow could not be exploited as the relevant
+        parameter to the function call was constant, however it was
+        fixed as it might have grown to a problem if this function
+        had been used by other parts of the code with variable
+        parameters.</li>
+    <li>Some code using STL was changed to gain better compatibility
+        with old GCC versiosns (credits to Jeremy Chadwick for finding
+        the solution)</li>
+    <li>Typos in mod_suphp.c for Apache 1.3 (credits to Johan Ekberg for
+        finding them)</li>
+   </ul>
+   There is a small new feature, too:
+   <ul>
+     <li>chroot() support was added. In the configuration file, a path
+         can be specified, in which suPHP will chroot() before executing
+         the script.</li>
+   </ul>
+  </td></tr></table>
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">suPHP 0.6.0 released</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic">2005-06-11</th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   suPHP 0.6.0 has been released.<br />
+   For this release suPHP has been completely rewritten.
+   This in an (incomplete) list of only the most important changes:
+   <ul>
+    <li>Complete code rewritten now using C++ instead of C</li>
+    <li>Automake based build system</li>
+    <li>suPHP is now reading its runtime configuration from a file</li>
+    <li>Apache 1.3 module completely rewritten - now all modes are
+        supported with Apache 1.3, too</li>
+    <li>Support for concurrent use of different PHP version (e.g. 3, 4, 5)</li>
+   </ul>
+   This release was sponsored by Techno-vi - Wanix.<br />
+   Thanks to the sponsor!
+  </td></tr></table>
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">suPHP 0.5.2 released</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic"></th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   suPHP 0.5.2 has been released.<br />
+   There are several changes in comparison to version 0.5.1:
+   <ul>
+    <li>Added support for UIDs/GIDs not listed in system configuration
+        when using "force" or "paranoid" mode</li>
+    <li>Fixed bug in configure script that caused autoconf to assume 
+        wrong values</li>
+    <li>Changed behaviour for setting "REDIRECT_STATUS": Now it is 
+        only set to "200" when it has not already been set by Apache</li>
+    <li>Fixed bug causing environment variables with values ending with a 
+        '=' sign to be unset</li>
+   </ul>
+  </td></tr></table>
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">suPHP 0.5.1 released</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic"></th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   suPHP 0.5.1 has been released. Version 0.5.1 is mainly a bugfix
+   release, fixing the bug causing a segmentation fault in the Apache
+   2 module and improving the handling of environment variables.<br />
+   Instead of setting unneeded / unwanted environment variables to an
+   emtpy string, they are now completely removed from the environment.
+  </td></tr></table>
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">suPHP 0.5 released</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic"></th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   After several days of coding and an even longer time of testing now
+   suPHP 0.5 has finally been released.<br />
+   The most important improvement is Apache 2.x compatibility but there are
+   are a lot of more features, including improved logging and compatibility
+   for more platforms. See the ChangeLog in the suPHP distribution for
+   details.
+  </td></tr></table>
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">Solaris patch for suPHP 0.3.1</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic"></th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   Due to differences in the system APIs between Linux and Solaris suPHP did
+   not work on Solaris systems.<br />
+   Now, James O'Dell has created a compatibility patch for Solaris
+   (which might also work for IRIX). You can get the
+   <a href="https://github.com/smarsching/suphp/releases/download/last/suphp-0.3.1-solaris.patch">patch</a> from the
+   suPHP download archive.
+  </td></tr></table>
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">suPHP 0.3.1 released</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic"></th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   suPHP 0.3.1 has been released. In this version a bug concerning the
+   "--disable-checkuid" option has been fixed.<br />
+   If you suceeded in compiling suPHP 0.3 there is no need to upgrade to
+   version 0.3.1.
+  </td></tr></table>
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">suPHP 0.3 available</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic"></th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   suPHP 0.3 has been released. The most important change concerns the build
+   system which is now based on GNU autoconf. Due to this change building
+   and installing suPHP should be much easier now.<br />
+   A problem which was sometimes caused by the so called "supplementary
+   groups" feature has been fixed: In the past, users gained permissions
+   of the group the Apache was running as. Now, they have exactly the
+   permissions of the groups, which they are a member in.<br />
+   Besides some small changes have been made in order to make suPHP work
+   with scripts whose UIDs/GIDs are not listed in /etc/passwd respective
+   /etc/group. See the documentation for details on this change.
+  </td></tr></table>
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">Patch fo suPHP on FreeBSD available</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic"></th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   Clement Laforet has created a
+   <a href="https://github.com/smarsching/suphp/releases/download/last/suphp-0.2.2-freebsd.diff.gz">patch</a> to make suPHP
+   work on FreeBSD without having to modify the configuration.<br />
+   The patch was made for suPHP 0.2.2 but will probably also work with
+   suPHP 0.2.3.<br />
+  </td></tr></table>
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">French documentation for suPHP now available</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic"></th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   The documentation included within the suPHP packages is now available
+   in <a href="https://github.com/smarsching/suphp/releases/download/last/suphp-fr-doc-0.2.2.tar.gz">French language</a>,
+   too.<br />
+   Thanks to Clement Laforet for translating the docs!<br />
+  </td></tr></table>
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">suPHP 0.2.3 released</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic"></th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   In version 0.2.3 a small bug, which made it possible to circumvent <br />
+  .htaccess security when FollowSymlinks was activated, was fixed.
+  </td></tr></table>
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">Bug in suPHP 0.2.1, version 0.2.2 released</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic"></th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+      In the package with suPHP 0.2.2 the file "suphp.h" was not included.<br />
+      For this reason <span style="font-weight:bold">suPHP 0.2.1 failed to compile</span>!<br />
+      In suPHP 0.2.2 this file is included again, so there shouldn't be this
+      problem any more.
+  </td></tr></table>
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">suPHP 0.2.1 now available</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic"></th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   In suPHP 0.2.1 a bug, which caused the suPHP_ConfigPath option not
+   to work on some PHP installations, was fixed.
+  </td></tr></table>
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">German documentation for suPHP 0.2 now available</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic"></th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   The documentation included within the suPHP packages is now available
+   in German language, too.<br />
+   Thanks to Jonas Pasche for translating the docs!
+  </td></tr></table>
+  <br /><table style="border:1px;border-style:solid;border-color:#9999cc;width:80%;background:#ccccff;margin-left:auto;margin-right:auto"><tr><th style="background:#ccccff;font-weight:bold;font-size:16px;text-align:left">Changes in version 0.2</th><th style="background:#ccccff;font-size:14px;text-align:right;font-style:italic"></th></tr><tr><td style="background:#ffffff;text-align:left" colspan="2">
+   - Added support for (de-)activation for each VirtualHost defined in
+     the Apache configuration<br />
+   - Added support for different php.ini's, configurable in the
+     Apache config
+  </td></tr></table>
+ </td></tr></table></td></tr><tr><td style="border:0px;border-top:1px;border-style:solid;text-align:center;padding:4px">
+       (c) 2006-2008 Sebastian Marsching<br /><br /><a href="http://validator.w3.org/check/referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" style="border:0px;width:88px;height:31px" /></a><a href="http://jigsaw.w3.org/css-validator/"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></td></tr></table></body></html>

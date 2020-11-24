@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>suPHP - Documentation - INSTALL</title><style type="text/css">
+     h1
+     {
+      font-family: Helvetica, Arial;
+      font-size: 48px;
+     }
+     
+     body,p,table,td
+     {
+      /* font-family: Times, Times New Roman; */
+      font-family: Helvetica, Arial, sans-serif;
+      font-size:14px;
+      color:#000000;
+     }     
+     
+     table,td
+     {
+      border-color:#000000;
+     }
+     
+     h1
+     {
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:28px;
+      font-weight:bold;
+      color:#000000;
+     }
+     
+     h2
+     {
+      font-family:Arial,Helvetica,sans-serif;
+      font-size:20px;
+      color:#000000;
+      font-weight:normal;
+     }
+     
+     a
+     {
+      color:#4444aa
+     }
+     
+     .navlink
+     {
+      font-family: Helvetica, Arial;
+      font-size: 16px;
+      font-weight: bold;
+      text-decoration: none;
+      color:#000000;
+     }
+     
+     table.download,table.download td, table.download th
+     {
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 13px;
+     }
+     
+     th.download
+     {
+      background:#000000;
+      color:#ffffff;
+     }
+     
+     a.download
+     {
+      color:#000000;
+     }
+    </style></head><body style="background-color:#ffffff"><table style="border:0px;width:100%"><tr><td style="text-align:center;vertical-align:middle;padding:8px"><h1><img style="vertical-align:middle" src="images/suphp_logo.png" alt="suPHP" />
+        Homepage
+       </h1></td></tr><tr><td style="border-width:1px 0px;border-style:solid;text-align:center;padding:4px"><a href="Home.html" class="navlink">Home</a>
+       |
+       <a href="Download.html" class="navlink">Download</a>
+       |
+       <a href="FAQ.html" class="navlink">FAQ</a>
+       |
+       <a href="Documentation.html" class="navlink">Documentation</a>
+       |
+       <a href="Help.html" class="navlink">Help</a></td></tr><tr><td style="text-align:center;vertical-align:top;height:100%"><table style="text-align:center;border:0px;padding:0px;margin:0px;width:80%;margin-left:auto;margin-right:auto"><tr><td style="text-align:center;vertical-align:top"><div style="border-style: solid; border-width: 3px; border-color: #aa0000; font-size: 1.2em; padding: 0.3em;">
+            suPHP is not maintained any longer and will not receive any further
+            updates <strong>not even security patches</strong>.
+            <br />
+            If you want to continue using suPHP, feel free to create a fork (the
+            complete code is licensed under the GPL version 2).
+            <br />
+            If you are looking for an alternative, have a look at
+            <a href="https://wiki.apache.org/httpd/PHP-FPM">php-fpm</a>.
+            <br />
+            There also is a
+            <a href="https://github.com/lightsey/mod_suphp">fork</a> of suPHP
+            maintained by John Lightsey on GitHub.
+          </div><br />
+  <table style="width:90%;margin-left:auto;margin-right:auto"><tr><td style="text-align:left">
+   <pre>===========================
+== suPHP                 ==
+===========================
+
+Installation
+------------
+
+1. Introduction
+
+The suPHP Apache module together with suPHP itself provides an easy way to
+run PHP scripts with different users on the same server.
+
+It provides security, because the PHP scripts are not run with the rights of
+the webserver's user.
+In addition to that you probably won't have to use PHP's "safe mode", which
+applies many restrictions on the scripts.
+
+Please note that the suPHP binary has to be installed setuid-root to work,
+so a security bug in suPHP probably will allow atackers to run commands with
+root privileges. Although I currently don't know any bug in suPHP I can't
+guarantee that there aren't any.
+
+2. Installation
+
+Run ./configure with the appropriate paramters for your system.
+
+On most systems a
+ ./configure --prefix=/usr
+will suffice.
+
+The configure script can take the familar GNU autoconf arguments plus the
+following suPHP specific ones:
+
+--disable-checkpath: With this compile time option suPHP does not check,
+                     whether a script (or a symink to it)is inside the
+                     DOCUMENT_ROOT. You may want to activate this option
+                     if you are working with "Alias"-directives.
+
+--disable-checkuid:  You may specify this option to make suPHP work with
+                     scripts whose UIDs are not listed in /etc/passwd.
+
+--disable-checkgid:  You may specify this option to make suPHP work with 
+                     scripts whose GIDs are not listed in /etc/group.
+
+--with-apxs=FILE:    Path to "apxs" of your Apache installation. If not
+                     specified, configure will look for apxs in your PATH.
+                     Without apxs the Apache module mod_suphp will not be
+                     built. It will not be built either, if your Apache has
+                     been compiled without DSO support. Please make sure you
+                     specify the right path to apxs, because suPHP will use
+                     apxs to check whether to build mod_suphp for Apache 1
+                     or Apache 2.
+
+--with-min-uid=UID:  The minium UID that suPHP will allow PHP to run scripts 
+                     with (defaults to 100).
+
+--with-min-gid=GID:  The minium GID that suPHP will allow PHP to run scripts
+                     with (defaults to 100).
+
+--with-apache-user=USERNAME:
+                     Username (not UID) Apache is running as (defaults to
+                     wwwrun).
+
+--with-logfile=FILE  Path to the suPHP logfile (defaults to
+                     /var/log/httpd/suphp_log).
+                     
+--with-setid-mode=MODE:
+                     MODE has to be one of:
+                     "owner":    Run scripts with owner UID/GID
+                     "force":    Run scripts with UID/GID specified in Apache 
+                                 configuration
+                     "paranoid": Run scripts with owner UID/GID but also check
+                                 if they match the UID/GID specified in the
+                                 Apache configuration
+                     The default is "paranoid" mode.
+                     You should *NEVER* use "force" mode as it is very
+                     dangerous.
+                     While "owner" mode is not as dangerous as "force" mode
+                     its use is disadvised and "paranoid" mode should be
+                     preferred.
+
+Now compile suPHP using "make" and if no error occured install it using
+"make install". Be sure to be root, when you try to install it.
+
+If your Apache is running with DSO support and "apxs" was found during the
+build process, you are done. Otherwise you have to rebuilt your Apache
+server with "mod_suphp.c" included. If you used another prefix during the
+suPHP build than "/usr", you have to modify "mod_suphp.c" to set the path to
+the suPHP executable (which you can find in $exec_prefix/sbin/suphp).
+
+Details on how to compile your Apache webserver with mod_suphp can be found
+in apache/INSTALL.
+
+Now, you have to modify your "httpd.conf" to activate suPHP for specific 
+VHosts. See apache/CONFIG for details on this.
+
+Please note that in order to make suPHP work, you have to specify at least
+one handler in the suPHP configuration file. Read CONFIG for additonal
+information about how to configure suPHP.
+
+===================================
+(c)2002-2008 by Sebastian Marsching
+&lt;sebastian@marsching.com&gt;
+Please see LICENSE for
+additional information
+</pre>
+  </td></tr></table>
+ </td></tr></table></td></tr><tr><td style="border:0px;border-top:1px;border-style:solid;text-align:center;padding:4px">
+       (c) 2006-2008 Sebastian Marsching<br /><br /><a href="http://validator.w3.org/check/referer"><img src="http://www.w3.org/Icons/valid-xhtml10" alt="Valid XHTML 1.0!" style="border:0px;width:88px;height:31px" /></a><a href="http://jigsaw.w3.org/css-validator/"><img style="border:0;width:88px;height:31px" src="http://jigsaw.w3.org/css-validator/images/vcss" alt="Valid CSS!" /></a></td></tr></table></body></html>
